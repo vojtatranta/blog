@@ -1,0 +1,53 @@
+
+@import './screen.css'
+@import './spinners.css'
+
+.current-page
+	padding: 0 .5rem
+
+.page-control
+	cursor: pointer
+
+.paging
+	float: right
+	padding-right: 1rem
+
+.circle-wrapper
+	position: fixed
+	z-index: 99
+	left: 50%
+	top: 30%
+	width: 60px
+	height: 60px
+	text-align: center
+
+.disabled
+	color: #bdbdbd
+
+.hidden
+	display: none
+
+.spinner
+	width: 60px
+	height: 60px
+	background-color: #000
+	margin: 100px auto
+	-webkit-animation: sk-rotateplane 1.2s infinite ease-in-out
+	animation: sk-rotateplane 1.2s infinite ease-in-out
+
+@-webkit-keyframes sk-rotateplane
+	0%
+		transform: perspective(120px)
+	50% 
+		transform: perspective(120px) rotateY(180deg)
+	100% 
+		transform: perspective(120px) rotateY(180deg)  rotateX(180deg)
+
+@keyframes sk-rotateplane 
+	0% 
+		transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+	50%
+		transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+	100%
+		transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg)
+
