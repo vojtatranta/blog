@@ -150,7 +150,7 @@ export function updateTask(id, token, task, optimistic = false, optimisticOnly =
         try {
             let response = JSON.parse(result.text)
           } catch(e) {
-            let response = result.text
+            return errorMessage()
           }
           dispatch(createUpdateTaskAction(result.text.task))
         }, (error, status) => {
