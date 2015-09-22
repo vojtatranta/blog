@@ -3,11 +3,7 @@ React = require 'react'
 actions = require '../actions'
 cx = require 'classnames'
 
-mapStateToProps = (state) ->
-	tasksFilters: state.tasksFilters
-	token: state.token
-
-Task = connect(mapStateToProps, actions) React.createClass
+Task = connect((-> {}), actions) React.createClass
 
 	delete: ->
 		@props.deleteTask @props.id, @props.token, true
@@ -22,7 +18,7 @@ Task = connect(mapStateToProps, actions) React.createClass
 				<span className="task_label">{@props.label}</span>
 				<span className="task__delete-button" title="Delete" onClick={@delete}></span>
 			</div>
-			{@props.subtasks? and <ul className="subtask-list">{@props.subtasks.map (task, i) => <Task {...task} key={i} isFetching={@props.isFetching} isSubtask={true}/>}</ul>}
+			{@props.subtasks? and <ul className="subtask-list">{@props.subtasks.map (task, i) => <Task {...task} key={i} token={@props.token} isFetching={@props.isFetching} isSubtask={true}/>}</ul>}
 		</li>
 
 module.exports = connect((-> {}), actions)(Task)

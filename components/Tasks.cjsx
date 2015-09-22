@@ -25,7 +25,12 @@ module.exports = connect(mapStateToProps, actions) React.createClass
 		@props.changeLimit(newLimit)
 		@props.changePage(0)
 
+	paginate: (item, i) ->
+		i + 1 > @props.page * @props.limit and i + 1 <= @props.page * @props.limit + @props.limit
+
 	render: ->
+		visibleTasks = @props.tasks.filter((task) => matchesFilters(task, @props.tasksFilters))
+		tasksToDisplay = visibleTasks.filter(@paginate)
 		<div className="tasks-wrapper">
 			<div className="app-brand">To-Do App</div>
 			<div className="user-info">
@@ -35,10 +40,10 @@ module.exports = connect(mapStateToProps, actions) React.createClass
 				<TodoForm token={@props.token} />
 				<div className="controls">
 					<label htmlFor="show-completed">Completed only: <input type="checkbox" id="show-completed" onClick={@toggleCompletedDisplay} /></label>
-					<Pagination changeLimit={@changeLimit} changePage={@props.changePage} limit={@props.limit} page={@props.page} max={@props.tasks.length} />
+					<Pagination changeLimit={@changeLimit} currentlyDisplaying={tasksToDisplay.length} changePage={@props.changePage} limit={@props.limit} page={@props.page} max={visibleTasks.length} />
 				</div>
 				<ul className="task-list">
-					{<Task {...task} key={i} isFetching={@props.isFetching} token={@props.token} isSubtask={false} /> for task, i in @props.tasks.filter((task) => matchesFilters(task, @props.tasksFilters)) when i + 1 > @props.page * @props.limit and i + 1 <= @props.page * @props.limit + @props.limit}
+					{tasksToDisplay.map (task, i) => <Task {...task} key={i} token={@props.token} isFetching={@props.isFetching} token={@props.token} isSubtask={false} />}
 				</ul>
 				<Circle shown={@props.isFetching} />
 			</div>
