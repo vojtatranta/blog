@@ -1,0 +1,171 @@
+
+$gray: #080808;
+$contact: #00BA63;
+$news: #E4FD02;
+$projects: #4E00DF;
+$bio: #F50014;
+$content-backg: #fafafa;
+
+.poiret-one {
+	font-family: 'Poiret One', cursive;
+}
+
+.open-sans {
+	font-family: 'Open sans', sans-serif;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	@extend .open-sans;
+	height: 760px;
+}
+
+p {
+	margin-bottom: .9rem;
+}
+
+.html {
+	font-size: 16px;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: underline;
+}
+
+a img {
+	border: none;
+}
+
+.wrapper {
+	width: 100%;
+	overflow: hidden;
+}
+
+.color-bio {
+	color: $bio;
+}
+
+.featured {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+	font-style: italic;
+}
+
+.third-heading {
+	margin-bottom: .3rem;
+	margin-top: .3rem;
+}
+
+.main-heading {
+	@extend .poiret-one;
+	font-weight: normal;
+	text-align: right;
+	color: $gray;
+	text-align: right;
+	line-height: 3rem;
+	font-size: 3.7rem;
+}
+
+.article-heading {
+	@extend .poiret-one;
+	font-size: 3rem;
+}
+
+.main-heading__last-name {
+	font-weight: bold;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.static-side {
+	position: fixed;
+	width: 200px;
+	margin-top: 2rem;
+	margin-left: 1rem;
+}
+
+.static-placeholder {
+	flex: 1;
+	flex-base: 200px;
+	max-width: 200px;
+	height: 100%
+}
+
+.content {
+	flex: 3;
+	margin-left: .5rem;
+}
+
+.content__text {
+	color: $gray;
+	margin: 2rem 0 0 10%;
+	max-width: 500px;
+	min-height: 500px;
+}
+
+.nav {
+	@extend .poiret-one;
+	margin-top: 2rem;
+}
+
+.nav__item {
+	height: 3rem;
+	margin-bottom: .3rem;
+	display: block;
+	background: $content-backg;
+	font-size: 2rem;
+	overflow: hidden;
+}
+
+.nav__item__link {
+	text-decoration: none;
+	display: block;
+	line-height: 3.5rem;
+	text-align: right;
+	padding: 0 .3rem .2rem 0;
+	transition: color .5s ease, background .3s ease;
+}
+
+.nav__item__link--bio:hover {
+	background: $bio;
+}
+
+.nav__item__link:hover {
+	color: white;
+}
+
+.nav__item__link--bio:before {
+	background: $bio;
+}
+
+.nav__item__link--contact:before {
+	background: $contact;
+}
+
+.nav__item__link--contact:hover {
+	background: $contact;
+}
+
+
+.nav__item__link:before {
+	content: "";
+	display: block;
+	float: left;
+	height: 3rem;
+	width: 3rem;
+}
+
+

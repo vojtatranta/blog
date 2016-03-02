@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var PROD = JSON.parse(process.env.PROD || "0");
+var PROD = process.env.NODE_ENV == 'production'
 
 module.exports = {
   devtool: PROD ? '' : 'cheap-module-eval-source-map',
@@ -15,11 +15,11 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: 'http://localhost:3000/static/'
   },
-  plugins: PROD ? 
+  plugins: PROD ?
     [
       new ExtractTextPlugin('style.css', {allChunks: true}),
       new webpack.optimize.UglifyJsPlugin({minimize: true, comments: false})
-    ] : 
+    ] :
     [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()
@@ -37,20 +37,11 @@ module.exports = {
       test: /\.js$/,
       loaders: ['babel'],
       include: path.join(__dirname, '..', '..', 'src')
-    }, {
-      test: /\.cjsx$/,
-      loaders: PROD ? ['coffee-loader', 'cjsx'] : ['react-hot', 'coffee-loader', 'cjsx']
-    }, {
-      test: /\.coffee$/,
-      loaders: ['coffee-loader']
-    },
-    {
-      test: /\.sass$/,
-      loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader?minimize!autoprefixer-loader?browsers=last 2 version!sass-loader?indentedSyntax') : 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 version!sass-loader?indentedSyntax'
     },
     {
       test: /\.css$/,
-      loader: PROD ? ExtractTextPlugin.extract('style-loader', 'style!css-loader?minimize') : 'style!css'
+      loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader?minimize&modules&importLoaders=1&localIdentName=[name]__[local]!sass-loader!autoprefixer-loader?browsers=last 2 version') :
+      'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]!sass-loader!autoprefixer-loader?browsers=last 2 version'
     },
     {
       test: /.*\.(gif|png|jpe?g|svg)$/i,
